@@ -22,9 +22,9 @@ A thing to note: *app can be a generator*. That means, it calls `start_response`
 
 Now, here is the idea - since the app can be a generator.
 
-- generator yields a special value
-- we understand it wants to be suspended, switch to processing other requests
-- when it's ready, we continue iterating on it
+- generator yields a special value, indicating it wants to be suspended
+- we switch to processing other requests
+- when the generator is ready, we continue iterating on it
 
 ### Implementation: yielding a Future
 
