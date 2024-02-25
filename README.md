@@ -45,7 +45,7 @@ Obvously, an app can be suspended and resumed multiple times.
 
 I've made a [proof of concept](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) for gunicorn, also provided an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it.
 
-The implementation is as follows: the task that is submitted to a thread pool is iterating the app until it yields `resume`. The `resume` callback submits the generator to a thread pool for execution again.
+The implementation is as follows: the task that is submitted to a thread pool is iterating the app until it yields `resume`. The `resume` callback submits the generator to the thread pool for execution again.
 
 
 Of course current PR is not ready to merge: for example, it lacks proper error propagation.
