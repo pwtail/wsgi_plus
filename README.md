@@ -38,7 +38,7 @@ def application(environ, start_response):
     yield b'Hi!\n'
 ```
 
-Simple, isn't it? And 100% backwards-compatible too.
+Simple, isn't it? And backwards-compatible too!
 
 ### Proof of concept
 
