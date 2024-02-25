@@ -37,7 +37,7 @@ def application(environ, start_response, resume):
 resume()
 ```
 
-The application provides one more callback - `resume`. It is called by the application when it's ready to be iterated further. When the application wants to be suspended, it yields this callback.
+The application takes one more argument - the `resume` callback. It is called by the application when it's ready to be iterated further. When the application wants to be suspended, it yields this callback.
 
 ### Proof of concept
 
