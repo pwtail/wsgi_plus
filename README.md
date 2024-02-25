@@ -1,6 +1,6 @@
 # RFC: WSGI+
 
-### The application shouldn’t do anything that takes an undefined amount of time
+### Application shouldn’t do anything that takes an undefined amount of time
 
 An excerpt from gunicorn [docs](https://docs.gunicorn.org/en/stable/design.html?highlight=timeout#choosing-a-worker-type) says:
 
