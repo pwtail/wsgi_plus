@@ -6,7 +6,7 @@ An excerpt from gunicorn [docs](https://docs.gunicorn.org/en/stable/design.html?
 
 >The default synchronous workers assume that your application is resource-bound in terms of CPU and network bandwidth. Generally this means that your application shouldn’t do anything that takes an undefined amount of time. An example of something that takes an undefined amount of time is a request to the internet. At some point the external network will fail in such a way that clients will pile up on your servers. So, in this sense, any web application which makes outgoing requests to APIs will benefit from an asynchronous worker.
 
-This RFC addresses exactly this issue: it allows for WSGI apps not being bound by a strict timeot while still remaining blocking apps - mostly.
+This RFC addresses exactly this issue: it allows for WSGI apps to not be bound by a strict timeot while still remaining blocking apps - mostly.
 
 ### WSGI spec
 
@@ -43,6 +43,8 @@ I've made a proof of concept for this feature for gunicorn, [here](https://githu
 ### The goals and non-goals
 
 One frequent usecase that is addressed here is an application making http requests. Generally you can solve this by increasing the timeout and the number of threads. However, when your application makes an http request to a third-party service every time (being some kind of proxy), then you are left with no other choice than wrapping it into an async app. This RFC solves this.
+
+An obvious way of making a web request while the WSGI app is suspended is using a dedicated async thread. Anyway, this part is up to application.
 
 The non-goal is further extending of the WSGI spec. It is meant for deploying blocking Python web apps.
 
