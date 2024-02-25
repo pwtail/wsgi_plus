@@ -24,7 +24,7 @@ Now here is the idea: since the app already can be a generator - a lazy entity -
 
 ### Yielding a Future
 
-It is so indeed. Let's add a special value - a future. If application is yielding a future, you must stop iterating on it. However, when that future has completed without exception, you may continue the iteration.
+It is so indeed. Let's add a special value - a future. When application yields a future, you must stop iterating on it. However, when that future has completed without exception, you may continue the iteration.
 
 ```python
 def application(environ, start_response):
