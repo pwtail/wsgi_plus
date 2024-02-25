@@ -49,7 +49,7 @@ I've made a proof of concept for this feature for gunicorn, [here](https://githu
 
 One frequent usecase that is addressed here, is an application making http requests. Generally, you can solve this by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes an http request to a third-party service every time, then you are left with no choice other than wrapping it into an async app. This RFC solves this.
 
-An obvious way of making a web request while the WSGI app is suspended is using a dedicated async thread. Anyway, this part is left up to application.
+An obvious way of making a web request while the app is suspended is using a dedicated async thread. Anyway, this part is left up to application.
 
 The non-goal is further extending of the WSGI spec. It is meant for deploying blocking Python web apps.
 
