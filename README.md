@@ -20,7 +20,7 @@ The WSGI spec is simple and widely known. It provides the `start_response` callb
 
 A thing to note however is that the app can be a generator - that means, it calls `start_response` during the first iteration. This feature is not documented in the WSGI spec, but every WSGI server supports this.
 
-Here is the idea - since the app can be a generator.
+Now, here is the idea - since the app can be a generator.
 
 - generator yields a special value
 - we understand it wants to be suspended, switch to processing other requests
