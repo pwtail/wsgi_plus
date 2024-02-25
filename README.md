@@ -24,7 +24,7 @@ Now, here is the idea - since the app can be a generator.
 
 - generator yields a special value
 - we understand it wants to be suspended, switch to processing other requests
-- when it's ready we continue iterating on it
+- when it's ready, we continue iterating on it
 
 ### Implementation: yielding a Future
 
