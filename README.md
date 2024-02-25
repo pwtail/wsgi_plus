@@ -54,3 +54,5 @@ The non-goal is further extending of the WSGI spec. It is meant for deploying bl
 ### Backwards compatibility
 
 I think backwards compatibility won't be too much of a problem here. For some period of time, the user may be required to explicitly enable the new functionality (in `gunicorn.conf` for example), then it may become a default some time.
+
+A disscussion [thread](https://github.com/pwtail/wsgi_plus/discussions/1) was created.
