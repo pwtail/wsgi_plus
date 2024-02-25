@@ -22,33 +22,26 @@ A thing to note however is that the app can be a generator - that means, it call
 
 Now here is the idea: since the app already can be a generator - a lazy entity - maybe, adding the suspend/resume feature won't be that hard?
 
-### The resume callback
+### Yielding a Future
 
-It is so indeed. Here is my modified version:
+It is so indeed. Let's add a special value - a future. If application is yielding a future, you must stop iterating on it. However, when that future has completed without exception, you may continue the iteration.
 
 ```python
-def application(environ, start_response, resume):
+def application(environ, start_response):
     if 'needs suspending':
-        yield resume
+        yield Future()
     start_response('200 OK', [('Content-type', 'text/plain')])
     yield b'Hi!\n'
-
-# somewhere in another thread:
-resume()
 ```
 
-The application takes one more argument - the `resume` callback. When the application wants to be suspended, it yields this callback. When it's ready to be iterated further, it calls `resume()`.
-
-Obvously, an app can be suspended and resumed multiple times.
+Simple, isn't it? And 100% backwards-compatible too.
 
 ### Proof of concept
 
 I've made a [proof of concept](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) for gunicorn, also provided an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it.
 
-The implementation is as follows: the task that is submitted to a thread pool is iterating the app until it yields `resume`. The `resume` callback submits the generator to the thread pool for execution again.
+The implementation is straightforward: the app is submitted to a thread pool and is iterating upon until it yields a future. Then we add a callback on that future that submits the app to the thread pool for iteration again.
 
-
-Of course current PR is not ready to merge: for example, it lacks proper error propagation.
 
 ### The goals and non-goals
 
@@ -58,8 +51,6 @@ An obvious way of making a web request while the app is suspended is using a ded
 
 The non-goal is further extending of the WSGI spec. It is meant for deploying blocking Python web apps.
 
-### Backwards compatibility
-
-I think backwards compatibility won't be too much of a problem here. For some period of time, the user may be required to explicitly enable the new functionality (in `gunicorn.conf` for example), then it may become a default some time.
+### Discussion
 
 A disscussion [thread](https://github.com/pwtail/wsgi_plus/discussions/1) was created.
