@@ -1,4 +1,4 @@
-# WSGI+: enhancing WSGI apps with suspend/resume (RFC)
+# WSGI+: enhancing WSGI apps with suspend/resume
 
 ### Application shouldn’t do anything that takes an undefined amount of time
 
