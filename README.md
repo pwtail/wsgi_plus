@@ -28,7 +28,7 @@ Now, here is the idea - since the app can be a generator.
 
 ### Implementation: yielding a Future
 
-I think, the best special value is a `Future`. When application yields a future, we stop iterating on it. And then, when future has completed without exception, we continue the iteration.
+I think, the best special value is a `Future`. When application yields a future, we stop iterating on it. Then, when future has completed without exception, we continue the iteration.
 
 ```python
 def application(environ, start_response):
