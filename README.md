@@ -16,7 +16,7 @@ def application(environ, start_response):
     yield b'Hi!\n'
 ```
 
-The WSGI spec is simple and widely known. It provides the `start_response` callback to the app while the app returns an iterator over the response body.
+The WSGI spec is simple and widely known. It provides a `start_response` callback to the app while the app returns an iterator over the response body.
 
 A thing to note: *app can be a generator*. That means, it calls `start_response` during the first iteration. This feature is not documented in the spec, but every WSGI server supports it.
 
