@@ -6,7 +6,7 @@ An excerpt from gunicorn [docs](https://docs.gunicorn.org/en/stable/design.html?
 
 >The default synchronous workers assume that your application is resource-bound in terms of CPU and network bandwidth. Generally this means that your application shouldn’t do anything that takes an undefined amount of time. An example of something that takes an undefined amount of time is a request to the internet. At some point the external network will fail in such a way that clients will pile up on your servers. So, in this sense, any web application which makes outgoing requests to APIs will benefit from an asynchronous worker.
 
-This RFC addresses exactly this issue: it allows for WSGI apps to not be bound by a strict timeot while still remaining blocking apps - mostly.
+This RFC addresses exactly this issue: it allows for WSGI apps to not be bound by a strict timeot while still remaining blocking apps - mostly. This is done by suspending/resuming the application.
 
 ### WSGI spec
 
