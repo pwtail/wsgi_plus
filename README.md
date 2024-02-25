@@ -8,7 +8,7 @@ An excerpt from gunicorn [docs](https://docs.gunicorn.org/en/stable/design.html?
 
 This RFC addresses exactly this issue: it allows for WSGI apps not being bound by a strict timeot while still remaining blocking apps - mostly.
 
-## WSGI spec
+### WSGI spec
 
 ```python
 def application(environ, start_response):
@@ -22,7 +22,7 @@ A thing to note here is that the app could be a generator - that means, it calls
 
 Now here is the idea: since the app already can be a generator - a lazy entity - maybe, adding the suspend/resume feature isn't that hard?
 
-## The resume callback
+### The resume callback
 
 It is so indeed. Here is my modified version:
 
@@ -36,16 +36,16 @@ def application(environ, start_response, resume):
 
 The application provides one more callback - `resume`. It is called by the application when it's ready to be iterated further. When the application wants to be suspended, it yields this callback.
 
-## Proof of concept
+### Proof of concept
 
 I've made a proof of concept for this feature for gunicorn, [here](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) is it. Also provided an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it. It's clear it isn't hard, but of course it is not ready to merge: for example, it lacks proper error propagation.
 
-## The goals and non-goals
+### The goals and non-goals
 
 One frequent usecase that is addressed here is an application making http requests. Generally you can solve this by increasing the timeout and the number of threads. However, when your application makes an http request to a third-party service every time (being some kind of proxy), then you are left with no other choice than wrapping it into an async app. This RFC solves this.
 
 The non-goal is further extending of the WSGI spec. It is meant for deploying blocking Python web apps.
 
-## Backwards compatibility
+### Backwards compatibility
 
 I think backwards compatibility won't be too much a problem here. For some period of time, the user may be required to explicitly enable the new functionality, then it may become a default some time.
