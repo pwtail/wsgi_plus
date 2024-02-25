@@ -41,7 +41,7 @@ The application provides one more callback - `resume`. It is called by the appli
 
 ### Proof of concept
 
-I've made a proof of concept for this feature for gunicorn, [here](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) is it. Also provided an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it. It's clear it isn't hard, but of course it is not ready to merge: for example, it lacks proper error propagation.
+I've made a proof of concept for this feature for gunicorn, [here](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) is it. Also provided an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it. It's clear it isn't hard to implement, but of course current PR is not ready to merge: for example, it lacks proper error propagation.
 
 ### The goals and non-goals
 
