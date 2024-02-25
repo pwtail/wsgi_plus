@@ -32,6 +32,9 @@ def application(environ, start_response, resume):
         yield resume
     start_response('200 OK', [('Content-type', 'text/plain')])
     yield b'Hi!\n'
+
+# somewhere in another thread:
+resume()
 ```
 
 The application provides one more callback - `resume`. It is called by the application when it's ready to be iterated further. When the application wants to be suspended, it yields this callback.
