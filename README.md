@@ -35,7 +35,7 @@ from concurrent.futures import Future
 
 def application(environ, start_response):
     # going to be suspended
-    fut: Furure = defer_to_another_thread()
+    fut: Future = defer_to_another_thread()
     yield fut
     # is resumed
     start_response('200 OK', [('Content-type', 'text/plain')])
