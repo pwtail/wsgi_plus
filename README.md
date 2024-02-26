@@ -31,9 +31,13 @@ Now, here is the idea - since the app can be a generator.
 I think, the best special value is a `Future`. When application yields a future, we stop iterating on it. Then, when future has completed without exception, we continue the iteration.
 
 ```python
+from concurrent.futures import Future
+
 def application(environ, start_response):
-    if 'needs suspending':
-        yield Future()
+    # going to be suspended
+    fut: Furure = defer_to_another_thread()
+    yield fut
+    # is resumed
     start_response('200 OK', [('Content-type', 'text/plain')])
     yield b'Hi!\n'
 ```
