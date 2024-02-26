@@ -42,7 +42,7 @@ Simple, isn't it? And backwards-compatible too!
 
 ### Proof of concept
 
-I've made a [proof of concept](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) for gunicorn, also provided an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it.
+I've made a [proof of concept](https://github.com/pwtail/gunicorn/pull/1/files#diff-9818e6c0e3d6054dc383f77ce881ba79f8090a904fb3abd9892306f096e58319) for gunicorn, also providing an [app](https://github.com/pwtail/gunicorn/blob/wsgi-plus/examples/wsgi_plus.py) to test it.
 
 The implementation is straightforward: submit generator to a thread pool, wait for a future, then add a callback on that future that submits it to the thread pool again.
 
