@@ -53,7 +53,7 @@ The implementation is straightforward: submit generator to a thread pool, wait f
 
 ### The goals and non-goals
 
-One frequent usecase that is addressed here, is an application making http requests. Generally, you can solve this by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes an http request every single time, then you are left with no choice other than wrapping it into an async app. This RFC gives you another choice.
+One frequent usecase is an application making http requests. Generally, you can solve that by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes too many http requests, then you are left with no choice other than wrapping it into an async app. This RFC gives you another choice.
 
 An obvious way of making a web request while the app is suspended is using a dedicated async thread. However, this part is left up to application.
 
