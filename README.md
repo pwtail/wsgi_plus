@@ -51,13 +51,15 @@ I've made a [proof of concept](https://github.com/pwtail/gunicorn/pull/1/files#d
 The implementation is straightforward: submit generator to a thread pool, wait for a future, then add a callback on that future that submits it to the thread pool again.
 
 
-### The goals and non-goals
+### Common usecase
 
-One frequent usecase is an application making http requests. Generally, you can solve that by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes too many http requests, then you are left with no choice other than wrapping it into an async app. This RFC gives you another choice.
+A common usecase is an application making http requests. Generally, you can solve that by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes too many http requests, then you are left with no choice other than wrapping it into an async app. This RFC gives you another choice.
 
 An obvious way of making a web request while the app is suspended is using a dedicated async thread. However, this part is left up to application.
 
-The non-goal is further extending of the WSGI spec. "Do one thing and do it well"
+### Non-goals
+
+A non-goal is further extending of the WSGI spec. "Do one thing and do it well" - as Unix philosophy states.
 
 ### Discussion
 
