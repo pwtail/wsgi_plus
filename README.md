@@ -53,9 +53,9 @@ The implementation is straightforward: submit generator to a thread pool, wait f
 
 ### Common usecase
 
-A common usecase is an application making http requests. Generally, you can solve that by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes too many http requests, then you are left with no choice other than wrapping it into an async app. This RFC gives you another choice.
+A common usecase is an application making http requests. Generally, you can solve that by increasing the timeout and the number of threads. However, if your application is some kind of proxy and  makes too many http requests, then you are left with no choice other than wrapping it into an async app.
 
-An obvious way of making a web request while the app is suspended is using a dedicated async thread. However, this part is left up to application.
+An obvious way to do it with WSGI+ is using a dedicated async thread. However, this part is left up to the application.
 
 ### Non-goals
 
